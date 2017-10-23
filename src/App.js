@@ -1,29 +1,25 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-
-const App = () => {
+import fb from "./img/fb.png"
+import tw from "./img/tw.png"
+import gl from "./img/g+.png"
+const App = ({ players, selectedPlayerIndex }) => {
   return (
     <section className="container">
       <div className="text-center abc-game">
         <div className='text-left'><img className='btn-direction' src="img/right.svg" alt="" /></div>
         <div className='text-left'><img className='btn-direction' src="img/left.svg" onClick={() => { this.prev() }} alt="" /></div>
-        <div>{this.showImagen()}</div>
-        <p className='text-left'>{this.state.count - 1} of 5 answered</p>
+        <div>IMAGEN</div>
+        <p className='text-left'>0 of 5 answered</p>
 
         <div className="bg-white text-center game">
-          {this.state.init && this.showQuestions()}
-          {this.state.complete && this.showAnswers()}
-          {this.state.solution && <div>
-            <h3>Respuestas correctas</h3>
-            <h4>{this.state.answersCorrect.length} de 5</h4>
-            {this.solution()}
-            <button className='btn-quiz' onClick={(e) => { this.again(e) }}>Again</button>
-          </div>}
+          <h1>Preguntas</h1>
+          <p>alternativas</p>
           <div className="social">
-            <div className='circle'><img src="img/fb.png" alt="" /></div>
-            <div className='circle'><img src="img/tw.png" alt="" /></div>
-            <div className='circle'><img src="img/g+.png" alt="" /></div>
+            <div className='circle'><img src={fb} alt="" /></div>
+            <div className='circle'><img src={tw} alt="" /></div>
+            <div className='circle'><img src={gl} alt="" /></div>
           </div>
         </div>
 
