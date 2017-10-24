@@ -8,7 +8,8 @@ export const nextQz = (choice) => {
 	store.setState({
         answers: newAnswers,
     })
-    next()
+    next();
+    // aleatorio();
 };
 
 const next = () => {
@@ -20,3 +21,17 @@ const next = () => {
         // answers: newAnswers,
 	})
 };
+
+const aleatorio = () => {
+    let oldChoices = store.getState().questions.choices;
+    let possition = [0,1,2].sort(() => {
+            return Math.random() - 0.5
+        });
+        let newChoices=[];
+        newChoices[0]=oldChoices[possition[0]]
+        newChoices[1]=oldChoices[possition[1]]
+        newChoices[2]=oldChoices[possition[2]]
+    store.setState({
+        choices: newChoices,
+    });
+}
