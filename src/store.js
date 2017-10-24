@@ -23,7 +23,8 @@ const allQuestions = [
     new Questions ('https://ihatetomatoes.net/react-tutorials/abc-quiz/images/bus.svg',
                     'What is the highest speed ever reached by a school bus?','590 Km/h', '320 Km/h', '245 Km/h'),
     new Questions ('https://ihatetomatoes.net/react-tutorials/abc-quiz/images/car.svg',
-                    'What is the longest car trip on one tank of gas?','2617 Km', '3568 Km', '1732 Km')
+                    'What is the longest car trip on one tank of gas?','2617 Km', '3568 Km', '1732 Km'),
+    new Questions ('https://ihatetomatoes.net/react-tutorials/abc-quiz/fonts/truck.svg')
 ]
 
 const initialState = {
