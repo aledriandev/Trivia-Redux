@@ -49,7 +49,7 @@ const Answers = ({ answers, questions , solution}) => {
   answers = answers.map((answer, index) => {
     return (
       <div key={index}>
-        <p><b>{questions[index]}: </b>{answer}</p>
+        <p><b>{questions[index].question}: </b>{answer}</p>
       </div>
     );
   });
@@ -66,25 +66,24 @@ const Solution = ({answers, questions}) => {
     return answers.map((answer,index)=>{
             if( answer == questions[index].choices[0]){
                 return <p className='correct' key={index}>
-                            {this.questions[index].question}: <b>{this.questions[index].choices[parseInt(answer)]}</b>
+                            {questions[index].question}: <b>{answer}</b>
                         </p>;
             }else{
-                return <p className='incorrect' key={index}>
-                            <del>{this.questions[index].question}: {this.questions[index].choices[parseInt(answer)]}</del>
-                            <b>{this.questions[index].choices[0]}</b>
+                return <p className='incorrect' key={index}><del>{questions[index].question}: {answer}</del>
+                            <b>{questions[index].choices[0]}</b>
                         </p>;
             }
         });
 }
 
-const App = ({ questions, counter, answers, solution }) => {
+const App = ({ questions, counter, answers, solution, complete, correct }) => {
   return (
     <section className="container">
       <div className="text-center abc-game">
         <div className='text-left'><img className='btn-direction' src="img/right.svg" alt="" /></div>
         <div className='text-left'><img className='btn-direction' src="img/left.svg" onClick={() => { this.prev() }} alt="" /></div>
         <div><img src={questions[counter].img} /></div>
-        <p className='text-left'>{counter} of 5 answered</p>
+        {complete && <p className='text-left'>{counter} of 5 answered</p>}
         {
           counter < 5
           &&
@@ -95,13 +94,13 @@ const App = ({ questions, counter, answers, solution }) => {
           />
         }
         {
-          counter == 5
+          counter == 5 && complete
           &&
           <div className="bg-white text-center result">
             <Answers 
               answers={answers} 
               questions={questions}
-              solution={showSolution}
+              solution={()=>showSolution()}
             />
           </div>
         }
@@ -109,6 +108,9 @@ const App = ({ questions, counter, answers, solution }) => {
           solution
           &&
           <div className="bg-white text-center again">
+            
+            <h3>Respuestas correctas</h3>
+            <h4>{correct} de 5</h4>
             <Solution 
               answers={answers} 
               questions={questions} 
@@ -120,6 +122,6 @@ const App = ({ questions, counter, answers, solution }) => {
   );
 }
 
-const mapToProps = ({ questions, counter, answers, solution }) => ({ questions, counter, answers, solution });
+const mapToProps = ({ questions, counter, answers, solution, complete, correct }) => ({ questions, counter, answers, solution, complete, correct });
 
 export default connect(mapToProps)(App);
