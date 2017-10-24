@@ -24,15 +24,15 @@ const allQuestions = [
                     'What is the highest speed ever reached by a school bus?','590 Km/h', '320 Km/h', '245 Km/h'),
     new Questions ('https://ihatetomatoes.net/react-tutorials/abc-quiz/images/car.svg',
                     'What is the longest car trip on one tank of gas?','2617 Km', '3568 Km', '1732 Km'),
-    new Questions ('https://ihatetomatoes.net/react-tutorials/abc-quiz/fonts/truck.svg')
+    new Questions ('https://ihatetomatoes.net/react-tutorials/abc-quiz/fonts/truck.svg', '', '', '', '') 
 ]
 
 const initialState = {
     counter: 0,
     questions: allQuestions,
     answers: [],
-    answersCorrect: [],
-    complete: false,
+    correct: 0,
+    complete: true,
     solution: false,
     init: true
 };
