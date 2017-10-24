@@ -5,7 +5,7 @@ import fb from "./img/fb.png";
 import tw from "./img/tw.png";
 import gl from "./img/g+.png";
 import { connect } from "redux-zero/react";
-import { nextQz } from './actions';
+import { nextQz, showSolution } from './actions';
 import { Row, Col } from 'react-bootstrap'
 
 const Choices = ({ choices, next }) => {
@@ -45,11 +45,11 @@ const Social = ({ }) => {
 }
 
 
-const Answers = ({ answers, questions }) => {
+const Answers = ({ answers, questions , solution}) => {
   answers = answers.map((answer, index) => {
     return (
       <div key={index}>
-        <p><b>{questions[index].question}: </b>{answer}</p>
+        <p><b>{questions[index]}: </b>{answer}</p>
       </div>
     );
   });
@@ -57,12 +57,27 @@ const Answers = ({ answers, questions }) => {
     <div>
       <h3>Here are you answers:</h3>
       {answers}
-      <button className='btn-quiz' onClick={e => this.showSolution(e)}>Submit</button>
+      <button className='btn-quiz' onClick={solution}>Submit</button>
     </div>
   );
 }
 
-const App = ({ questions, counter, answers }) => {
+const Solution = ({answers, questions}) => {
+    return answers.map((answer,index)=>{
+            if( answer == questions[index].choices[0]){
+                return <p className='correct' key={index}>
+                            {this.questions[index].question}: <b>{this.questions[index].choices[parseInt(answer)]}</b>
+                        </p>;
+            }else{
+                return <p className='incorrect' key={index}>
+                            <del>{this.questions[index].question}: {this.questions[index].choices[parseInt(answer)]}</del>
+                            <b>{this.questions[index].choices[0]}</b>
+                        </p>;
+            }
+        });
+}
+
+const App = ({ questions, counter, answers, solution }) => {
   return (
     <section className="container">
       <div className="text-center abc-game">
@@ -83,15 +98,28 @@ const App = ({ questions, counter, answers }) => {
           counter == 5
           &&
           <div className="bg-white text-center result">
-            <Answers answers={answers} questions={questions}/>
+            <Answers 
+              answers={answers} 
+              questions={questions}
+              solution={showSolution}
+            />
           </div>
         }
-        <div className="bg-white text-center again"></div>
+        {
+          solution
+          &&
+          <div className="bg-white text-center again">
+            <Solution 
+              answers={answers} 
+              questions={questions} 
+            />
+          </div>
+        }
       </div>
     </section>
   );
 }
 
-const mapToProps = ({ questions, counter, answers }) => ({ questions, counter, answers });
+const mapToProps = ({ questions, counter, answers, solution }) => ({ questions, counter, answers, solution });
 
 export default connect(mapToProps)(App);
