@@ -4,9 +4,18 @@ export const nextQz = (choice) => {
     console.log(choice);
     let oldAnswers = store.getState().answers;
     const newAnswers = oldAnswers.concat(choice);
-    console.log(newAnswers)
+    let corrects = store.getState().correct;
+    let questions = store.getState().questions;
+    const counter = store.getState().counter
+    if (choice == questions[counter].choices[0]){
+        corrects++;
+    }
+    console.log('correct'+corrects)
+    console.log('counter'+counter)
+    console.log('questio'+questions[counter].choices)
 	store.setState({
         answers: newAnswers,
+        correct: corrects
     })
     next();
     // aleatorio();
@@ -33,5 +42,12 @@ const aleatorio = () => {
         newChoices[2]=oldChoices[possition[2]]
     store.setState({
         choices: newChoices,
+    });
+}
+
+export const showSolution = () => {
+    store.setState({
+        solution: true,
+        complete: false,
     });
 }
